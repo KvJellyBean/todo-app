@@ -11,12 +11,10 @@ const Header = (() => {
     }
 
     function createHamburger() {
-        const container = document.createElement('div');
+        const container = document.createElement('label');
         container.classList.add('hamburger');
         container.innerHTML = `
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <input type="checkbox" />
         `;
         return container;
     }
