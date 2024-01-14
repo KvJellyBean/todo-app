@@ -179,29 +179,24 @@ nav {
         & ul {
             max-height: 15rem;
             overflow: auto;
-
-            & li {
-                .more {
-                    position: relative;
-                    display: flex;
-                    height: 100%;
-                    margin-right: .5rem;
-                }
-
-                & a {
-                    & svg:hover {
-                        transform: none;
-                    }
-                }
-            }
+            padding: .1rem;
         }
 
-        & svg {
+        .more {
+            position: relative;
+            display: grid;
+            place-content: center;
+            margin-right: .5rem;
+        }
+
+        & .addProject,
+        .more {
             cursor: pointer;
             transition: .3s ease;
         }
 
-        & svg:hover {
+        & .addProject:hover,
+        .more:hover {
             transform: scale(1.5);
             transition: .3s ease;
         }
@@ -335,26 +330,14 @@ main {
 
                     .edit,
                     .delete,
-                    .detail {
+                    .info {
                         cursor: pointer;
                         transition: .3s ease;
                     }
 
-                    & svg:hover {
+                    & img:hover {
                         transform: scale(1.5);
                         transition: .3s ease;
-                    }
-
-                    & .edit:hover {
-                        fill: yellowgreen;
-                    }
-
-                    & .delete:hover {
-                        fill: red;
-                    }
-
-                    & .detail:hover {
-                        fill: blue;
                     }
                 }
             }
