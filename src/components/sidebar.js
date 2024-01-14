@@ -2,14 +2,14 @@ const Sidebar = (() => {
     function initSidebar() {
         const sidebar = document.querySelector('nav');
         // Create home & project menu
-        const home = createHome();
-        const project = createProject();
+        const home = createHomeContainer();
+        const project = createProjectContainer();
 
         sidebar.append(home, project);
         return sidebar;
     }
 
-    function createHome() {
+    function createHomeContainer() {
         const container = document.createElement('div');
         container.id = 'home-nav';
         container.classList.add('sidebar');
@@ -28,29 +28,25 @@ const Sidebar = (() => {
                 <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M400-240v-80h240v80H400Zm-158 0L15-467l57-57 170 170 366-366 57 57-423 423Zm318-160v-80h240v80H560Zm160-160v-80h240v80H720Z"/></svg> Completed</a></li>
             </ul>
             <hr>
-        `
-
+        `;
         return container;
     }
 
-    function createProject() {
+    function createProjectContainer() {
         const container = document.createElement('div');
         container.id = 'project-nav';
         container.classList.add('sidebar');
         container.innerHTML = `
             <div class="project-container">
                 <h2>Project</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M520-400h80v-120h120v-80H600v-120h-80v120H400v80h120v120ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
+                <svg class="addProject" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M520-400h80v-120h120v-80H600v-120h-80v120H400v80h120v120ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
             </div>
             <hr>
-                <ul>
-                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M80-160v-160h160v160H80Zm240 0v-160h560v160H320ZM80-400v-160h160v160H80Zm240 0v-160h560v160H320ZM80-640v-160h160v160H80Zm240 0v-160h560v160H320Z"/></svg> Azz Project</a></li>
-    
-                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M80-160v-160h160v160H80Zm240 0v-160h560v160H320ZM80-400v-160h160v160H80Zm240 0v-160h560v160H320ZM80-640v-160h160v160H80Zm240 0v-160h560v160H320Z"/></svg> Bzz Project</a></li>
+                <ul id="project-list">
+
                 </ul>
             <hr>
-        `
-
+        `;
         return container;
     }
 
