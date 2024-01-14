@@ -3,6 +3,7 @@ import sidebar from './components/sidebar.js';
 import main from './components/mainPage.js';
 import footer from './components/footer.js';
 import './style.css';
+import EventHandler from './components/eventHandler.js';
 
 function initApp() {
     const content = document.querySelector('#content');
@@ -18,6 +19,6 @@ const loadDisplay = (() => {
     initApp();
     header.initHeader();
     sidebar.initSidebar();
-    main();
+    main.initMain();
     footer.initFooter();
 })();
