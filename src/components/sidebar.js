@@ -10,19 +10,22 @@ import addProject from '../images/addProject.svg';
 const Sidebar = (() => {
     function initSidebar() {
         const sidebar = document.querySelector('nav');
+        
         // Create home & project menu
-        const home = createHomeContainer();
-        const project = createProjectContainer();
+        const home = _createHomeContainer();
+        const project = _createProjectContainer();
 
         sidebar.append(home, project);
+
+        // DOM & Event Handler
         DOM.showProject();
-        EventHandler.showHomeTodos();
-        EventHandler.addProjectButton();
-        EventHandler.showProjectTodos();
+        EventHandler.homeSidebar();
+        EventHandler.projectSidebar();
+
         return sidebar;
     }
 
-    function createHomeContainer() {
+    function _createHomeContainer() {
         const container = document.createElement('div');
         container.id = 'home-nav';
         container.classList.add('sidebar');
@@ -30,7 +33,7 @@ const Sidebar = (() => {
             <h2>Home</h2>
             <hr>    
             <ul id="home-categories">
-                <li><a href="#" class="allTasks"><img class="allTasks" src="${allTasks}" alt="All Tasks" /> All Tasks</a></li>
+                <li><a href="#" class="all-tasks"><img class="all-tasks" src="${allTasks}" alt="All Tasks" /> All Tasks</a></li>
     
                 <li><a href="#" class="today"><img class="today" src="${today}" alt="Today" />Today</a></li>
     
@@ -45,14 +48,14 @@ const Sidebar = (() => {
         return container;
     }
 
-    function createProjectContainer() {
+    function _createProjectContainer() {
         const container = document.createElement('div');
         container.id = 'project-nav';
         container.classList.add('sidebar');
         container.innerHTML = `
             <div class="project-container">
                 <h2>Project</h2>
-                <img class="addProject" src="${addProject}" alt="Add Project" />
+                <img class="add-project" src="${addProject}" alt="Add Project" />
             </div>
             <hr>
                 <ul id="project-list">
