@@ -4,6 +4,7 @@ import main from './components/mainPage.js';
 import footer from './components/footer.js';
 import './style.css';
 import EventHandler from './components/eventHandler.js';
+import DOM from './components/dom.js';
 
 function initApp() {
     const content = document.querySelector('#content');
@@ -21,4 +22,5 @@ const loadDisplay = (() => {
     sidebar.initSidebar();
     main.initMain();
     footer.initFooter();
+    DOM.showAllTodoList();
 })();
