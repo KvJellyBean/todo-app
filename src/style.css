@@ -176,27 +176,43 @@ nav {
             gap: 1rem;
         }
 
-        & ul {
+        & ul#project-list {
             max-height: 15rem;
             overflow: auto;
             padding: .1rem;
+
+            & li {
+                gap: .5rem;
+                padding-right: .5rem;
+                align-items: stretch;
+
+                & a {
+                    & img:hover {
+                        transform: none;
+                    }
+                }
+
+                & a:hover {
+                    transform: none;
+                }
+
+                .menu {
+                    display: flex;
+                    gap: .5rem;
+
+                    & img {
+                        flex: auto;
+                    }
+                }
+            }
         }
 
-        .more {
-            position: relative;
-            display: grid;
-            place-content: center;
-            margin-right: .5rem;
-        }
-
-        & .addProject,
-        .more {
+        & img {
             cursor: pointer;
             transition: .3s ease;
         }
 
-        & .addProject:hover,
-        .more:hover {
+        & img:hover {
             transform: scale(1.5);
             transition: .3s ease;
         }
@@ -256,7 +272,7 @@ main {
             border-radius: .5rem;
         }
 
-        .add-button {
+        & button.add-button {
             display: flex;
             border-radius: 50%;
             position: fixed;
@@ -270,13 +286,13 @@ main {
             scale: 2.5;
             background-color: greenyellow;
 
-            & svg {
+            & img {
                 border-radius: 50%;
                 scale: .7;
             }
         }
 
-        .add-button:hover {
+        & button.add-button:hover {
             background-color: yellow;
             transform: scale(1.2);
             transition: .3s ease;
@@ -340,6 +356,63 @@ main {
                         transition: .3s ease;
                     }
                 }
+            }
+        }
+    }
+}
+
+
+/* Dialog */
+dialog {
+    padding: 1rem;
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    border-radius: 1rem;
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 1rem;
+
+        & legend {
+            font-family: 'Poppins-B';
+            font-size: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            width: 20rem;
+            text-align: center;
+
+            & input {
+                padding: .5rem;
+                font-size: 1rem;
+                text-align: center;
+                border-radius: 1rem;
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 2rem;
+
+            & button {
+                padding: 1rem 3rem;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+
+            .create-project {
+                background-color: greenyellow;
+            }
+
+            .cancel {
+                background-color: rgb(252, 102, 102);
             }
         }
     }
