@@ -1,16 +1,68 @@
 import Project from "./project";
 
 const projectLogic = (() => {
-    let projectList = [];
-    let numOfProject = projectList.length;
-    let defaultTodo = {
-        title: 'Default Title',
-        description: 'To Do Description',
-        due: '2024-01-01',
-        priority: 'Low',
-        project: '',
-        status: false,
+
+    let projectList = [{
+        projectIndex: 0,
+        name: 'First Project',
+        todos: [
+            {
+                title: 'Title 1',
+                description: 'To Do Description 1',
+                due: '2024-01-15',
+                priority: 'Medium',
+                project: 'First Project',
+                status: true,
+            },
+            {
+                title: 'Title 2',
+                description: 'To Do Description 2',
+                due: '2024-01-15',
+                priority: 'High',
+                project: 'First Project',
+                status: false,
+            },
+            {
+                title: 'Title 3',
+                description: 'To Do Description 3',
+                due: '2024-01-21',
+                priority: 'Low',
+                project: 'First Project',
+                status: false,
+            },
+        ]
+    }, {
+        projectIndex: 1,
+        name: 'Second Project',
+        todos: [
+            {
+                title: '2 Title 1',
+                description: 'To Do Description 1',
+                due: '2024-01-20',
+                priority: 'Low',
+                project: 'Second Project',
+                status: true,
+            },
+            {
+                title: '2 Title 2',
+                description: 'To Do Description 2',
+                due: '2024-01-20',
+                priority: 'Medium',
+                project: 'Second Project',
+                status: false,
+            },
+            {
+                title: '2 Title 3',
+                description: 'To Do Description 3',
+                due: '2024-01-21',
+                priority: 'High',
+                project: 'Second Project',
+                status: false,
+            },
+        ]
     }
+    ];
+    let numOfProject = projectList.length;
 
     // Main Getter & Setter
     function getProjectList() {
@@ -85,9 +137,18 @@ const projectLogic = (() => {
         const projectIndex = getProjectIndex(projectName);
         if (projectIndex > -1) {
             getProjectList().splice(projectIndex, 1);
+            _reorderProjects();
             setNumOfProject(getProjectList().length);
         } else {
             console.log('Project Not Found.');
+        }
+    }
+
+    // Function to reorder the project index -> used after removing project
+    function _reorderProjects() {
+        const projects = getProjectList();
+        for (let i = 0; i < projects.length; i++) {
+            projects[i].projectIndex = i;
         }
     }
 
