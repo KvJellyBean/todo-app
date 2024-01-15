@@ -1,4 +1,5 @@
 import projectLogic from "./projectLogic.js";
+import { format, isToday, isThisWeek } from 'date-fns';
 
 const todoLogic = (() => {
     // === TODO FUNCTIONS LOGIC === //
@@ -79,11 +80,67 @@ const todoLogic = (() => {
         projectTodos[todoIndex].status = !projectTodos[todoIndex].status;
     }
 
+    // FILTER
+    function getAllTodos(projects) {
+        const allTodos = [];
+
+        projects.forEach(project => {
+            allTodos.push(project.todos)
+        });
+        return allTodos.flat();
+    }
+
+    function getDateFilteredTodos(projects, dateFilter) {
+        const filteredTodos = []
+        projects.forEach(project => {
+            project.todos.forEach(todo => {
+                if (dateFilter(format(todo.due, 'MM/dd/yyyy'))) {
+                    filteredTodos.push(todo);
+                }
+            })
+        });
+        return filteredTodos;
+    }
+
+    function getPriorityTodos(projects) {
+        const sortedTodos = [];
+        const priorityArray = ["High", "Medium", "Low"];
+
+        projects.forEach(project => {
+            const projectTodos = project.todos;
+            const todosSort = projectTodos.slice().sort(function (a, b) {
+                let firstPrio = priorityArray.indexOf(a.priority);
+                let secPrio = priorityArray.indexOf(b.priority);
+                return firstPrio - secPrio;
+            });
+            sortedTodos.push(todosSort);
+        });
+        return sortedTodos.flat();
+    }
+
+    function getCompletedTodos(projects) {
+        const completedTodos = [];
+
+        projects.forEach(project => {
+            const projectTodos = project.todos;
+            projectTodos.forEach(todo => {
+                if (todo.status) {
+                    completedTodos.push(todo);
+                }
+            })
+        });
+        return completedTodos;
+    }
+
     return {
         addTodo,
         editTodo,
         removeTodo,
-        toggleTodoComplete
+        toggleTodoComplete,
+        getAllTodos,
+        getDateFilteredTodos,
+        getPriorityTodos,
+        getCompletedTodos,
     }
 })();
 
