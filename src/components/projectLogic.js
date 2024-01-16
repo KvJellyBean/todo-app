@@ -1,7 +1,14 @@
 import Project from "./project";
 
 const projectLogic = (() => {
-
+    let defaultTodo = {
+        title: 'My Activity',
+        description: 'Activity description',
+        due: '2024-01-20',
+        priority: 'Low',
+        project: '',
+        status: false,
+    }
     let projectList = [{
         projectIndex: 0,
         name: 'First Project',
@@ -64,6 +71,7 @@ const projectLogic = (() => {
     ];
     let numOfProject = projectList.length;
 
+    // ========================= GETTER & SETTER ========================= //
     // Main Getter & Setter
     function getProjectList() {
         return projectList;
@@ -94,8 +102,7 @@ const projectLogic = (() => {
         return getProjectTodos(getProjectIndex(projectName)).find(todo => todo.id === id);
     }
 
-    // === PROJECT FUNCTIONS LOGIC === //
-
+    // ========================= PROJECT LOGIC FUNCTIONS ========================= //
     /**
      * Add a new project with the todo(optional).
      * @param {string} projectName - The name of the project.
@@ -109,9 +116,10 @@ const projectLogic = (() => {
             const newProject = Project(getNumOfProject(), projectName, [todos]);
             getProjectList().push(newProject);
             setNumOfProject(getProjectList().length);
-        } else {
+        }
+        else {
             console.log('Project already exists.');
-            project.todos.push(todos);
+            // project.todos.push(todos);
         }
     }
 
@@ -121,19 +129,20 @@ const projectLogic = (() => {
      * @param {string} oldName - The new name of the project.
      */
     function editProject(oldName, newName) {
-        const project = getProjectByName(oldName);
-        if (project) {
-            project.name = newName;
-        } else {
-            console.log('Project Not Found.');
+        const oldProject = getProjectByName(oldName);
+        const newProject = getProjectByName(newName);
+        if (oldProject && !newProject) {
+            oldProject.name = newName;
+        } else if (oldProject && newProject) {
+            console.log('Fail to edit, other Project was found.');
         }
     }
 
     /**
-     * Remove a project from the projectList.
+     * Delete a project from the projectList.
      * @param {string} projectName - The name of the project.
      */
-    function removeProject(projectName) {
+    function deleteProject(projectName) {
         const projectIndex = getProjectIndex(projectName);
         if (projectIndex > -1) {
             getProjectList().splice(projectIndex, 1);
@@ -144,7 +153,9 @@ const projectLogic = (() => {
         }
     }
 
-    // Function to reorder the project index -> used after removing project
+    /**
+     * Reorder the project index -> used after removing project
+     */
     function _reorderProjects() {
         const projects = getProjectList();
         for (let i = 0; i < projects.length; i++) {
@@ -158,7 +169,7 @@ const projectLogic = (() => {
         getProjectByName, getProjectIndex, getProjectTodos, getTodo,
         addProject,
         editProject,
-        removeProject
+        deleteProject
     }
 })();
 

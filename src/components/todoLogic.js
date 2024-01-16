@@ -2,7 +2,7 @@ import projectLogic from "./projectLogic.js";
 import { format, isToday, isThisWeek } from 'date-fns';
 
 const todoLogic = (() => {
-    // === TODO FUNCTIONS LOGIC === //
+    // ========================= TODO LOGIC FUNCTIONS ========================= //
     /**
     * Add a new todo to the specified project.
     * @param {object} todo - The todo object to be added.
@@ -49,7 +49,7 @@ const todoLogic = (() => {
      * @param {string} projectName - The name of the project.
      * @param {number} todoId - The ID of the todo to be removed.
      */
-    function removeTodo(projectName, todoId) {
+    function deleteTodo(projectName, todoId) {
         // Take the project todos
         const projectTodos = projectLogic.getProjectTodos(projectLogic.getProjectIndex(projectName));
         // Take the index of the todo that want to be removed
@@ -64,7 +64,7 @@ const todoLogic = (() => {
     }
 
     /**
-     * toggle the completion status of a todo.
+     * Toggle the completion status of a todo.
      * @param {string} projectName - The name of the project.
      * @param {number} todoId - The ID of the todo to be removed.
      */
@@ -80,7 +80,10 @@ const todoLogic = (() => {
         projectTodos[todoIndex].status = !projectTodos[todoIndex].status;
     }
 
-    // FILTER
+    /**
+     * Get all the todos from all projects.
+     * @param {object} projects - The projects' object.
+     */
     function getAllTodos(projects) {
         const allTodos = [];
 
@@ -90,6 +93,11 @@ const todoLogic = (() => {
         return allTodos.flat();
     }
 
+    /**
+     * Get all the todos from all projects by date filter.
+     * @param {object} projects - The projects' object.
+     * @param {function} dateFilter - date-fns function.
+     */
     function getDateFilteredTodos(projects, dateFilter) {
         const filteredTodos = []
         projects.forEach(project => {
@@ -102,6 +110,10 @@ const todoLogic = (() => {
         return filteredTodos;
     }
 
+    /**
+     * Get all the todos based on priority High to Low.
+     * @param {object} projects - The projects' object.
+     */
     function getPriorityTodos(projects) {
         const sortedTodos = [];
         const priorityArray = ["High", "Medium", "Low"];
@@ -118,6 +130,10 @@ const todoLogic = (() => {
         return sortedTodos.flat();
     }
 
+    /**
+     * Get all the completed todos from all projects.
+     * @param {object} projects - The projects' object.
+     */
     function getCompletedTodos(projects) {
         const completedTodos = [];
 
@@ -135,7 +151,7 @@ const todoLogic = (() => {
     return {
         addTodo,
         editTodo,
-        removeTodo,
+        deleteTodo,
         toggleTodoComplete,
         getAllTodos,
         getDateFilteredTodos,
