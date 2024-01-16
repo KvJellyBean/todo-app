@@ -7,17 +7,17 @@ import info from "../images/info.svg";
 import { format, isToday, isThisWeek } from 'date-fns';
 
 const DOM = (() => {
-    // RENDER FUNCTION
+    // ========================= RENDER FUNCTION ========================= //
     function renderProject(projects) {
         const projectListContainer = document.querySelector('#project-list');
         projectListContainer.innerHTML = '';
 
         projects.forEach(project => {
             const list = document.createElement('li');
-            list.dataset.projectName = project.name
+            list.dataset.projectName = project.name;
             list.innerHTML = `
-                <a href="#">
-                    <img src="${hash}" alt="Project Logo" /> ${project.name}
+                <a href="#"  class="project-link" >
+                    <img src="${hash}" alt="Project Logo" class="project-link" /> ${project.name}
                 </a>
 
                 <div class="menu">
@@ -57,92 +57,139 @@ const DOM = (() => {
         });
     }
 
-    function renderTitle(title) {
+    function _renderTitle(title = '') {
         const titleContainer = document.querySelector('.project-title');
         titleContainer.innerText = title;
         return titleContainer;
     }
 
-    // FUNCTIONS TO SHOW DOM
-    // Showing Project List (Title Of the projects)
+    // ========================= OTHER FUNCTION ========================= //
+    // Function to show Project List (Title Of the projects)
     function showProject() {
         const projects = projectLogic.getProjectList();
         renderProject(projects);
     }
 
-    // Showing All To Do List (For: Home - All Tasks)
+    // Function to show All To Do List (For: Home - All Tasks)
     function showAllTodoList() {
-        renderTitle('All Tasks');
+        _renderTitle('All Tasks');
         const projects = projectLogic.getProjectList();
         const todos = todoLogic.getAllTodos(projects);
         renderTodoList(todos);
     }
 
-    // Showing Today To Do List (For: Home - Today)
+    // Function to show Today To Do List (For: Home - Today)
     function showTodayTodoList() {
-        renderTitle('Today');
+        _renderTitle('Today');
         const projects = projectLogic.getProjectList();
         const todayTodos = todoLogic.getDateFilteredTodos(projects, isToday);
         renderTodoList(todayTodos);
     }
 
-    // Showing Upcoming To Do List (For: Home - Upcoming)
+    // Function to show Upcoming To Do List (For: Home - Upcoming)
     function showUpcomingTodoList() {
-        renderTitle('Upcoming');
+        _renderTitle('Upcoming');
         const projects = projectLogic.getProjectList();
         const upcomingTodos = todoLogic.getDateFilteredTodos(projects, isThisWeek);
         renderTodoList(upcomingTodos);
     }
 
-    // Showing Priority[High to Low] To Do List (For: Home - Priority)
+    // Function to show Priority[High to Low] To Do List (For: Home - Priority)
     function showPriorityTodoList() {
-        renderTitle('Priority');
+        _renderTitle('Priority');
         const projects = projectLogic.getProjectList();
         const pirorityTodos = todoLogic.getPriorityTodos(projects);
         renderTodoList(pirorityTodos);
     }
 
-    // Showing Completed To Do List (For: Home - Completed)
+    // Function to show Completed To Do List (For: Home - Completed)
     function showCompletedTodoList() {
-        renderTitle('Completed Tasks');
+        _renderTitle('Completed Tasks');
         const projects = projectLogic.getProjectList();
         const completedTodos = todoLogic.getCompletedTodos(projects);
         renderTodoList(completedTodos);
     }
 
-    // Showing Project's To Do List/s
+    // Function to show Project's To Do List/s
     function showProjectTodoList(projectName) {
-        renderTitle(projectName);
+        _renderTitle(projectName);
         const projectIndex = projectLogic.getProjectIndex(projectName);
         const projectTodos = projectLogic.getProjectTodos(projectIndex);
         renderTodoList(projectTodos);
     }
 
-    // DIALOG
-    function showProjectDialog() {
+    // Function to show Add Project Dialog
+    function showAddProjectDialog() {
         const dialog = document.querySelector('dialog#project-dialog');
         const form = dialog.querySelector('form');
         form.reset();
         dialog.showModal();
     }
 
-    function closeProjectDialog() {
+    // Function to Close Add Project Dialog
+    function closeAddProjectDialog() {
         const dialog = document.querySelector('dialog#project-dialog');
         dialog.close();
+    }
+
+    // Function to show Edit Project Dialog
+    function showEditProjectDialog() {
+        const dialog = document.querySelector('dialog#project-dialog-edit');
+        const form = dialog.querySelector('form');
+        form.reset();
+        dialog.showModal();
+    }
+
+    // Function to close Edit Project Dialog
+    function closeEditProjectDialog() {
+        const dialog = document.querySelector('dialog#project-dialog-edit');
+        dialog.close();
+    }
+
+    // Function to add and show the new project
+    function addAndShowProject(e) {
+        e.preventDefault();
+        const projectName = document.querySelector('#project-name').value;
+        projectLogic.addProject(projectName);
+        showProject();
+        showProjectTodoList(projectName);
+        closeAddProjectDialog();
+    }
+
+    // Function to edit and show the edited project
+    function editAndShowProject(e, oldName) {
+        e.preventDefault();
+        const newName = document.querySelector('#project-name-edit').value;
+        projectLogic.editProject(oldName, newName);
+        showProject();
+        showProjectTodoList(newName);
+        closeEditProjectDialog();
+    }
+
+    // Function to edit and show the current all project
+    function deleteAndShowProject(projectName) {
+        projectLogic.deleteProject(projectName);
+        DOM.showProject();
+        DOM.showAllTodoList();
     }
 
     return {
         renderProject,
         renderTodoList,
         showProject,
-        showProjectDialog,
-        closeProjectDialog,
         showAllTodoList,
         showTodayTodoList,
         showUpcomingTodoList,
         showPriorityTodoList,
         showCompletedTodoList,
         showProjectTodoList,
+        showAddProjectDialog,
+        closeAddProjectDialog,
+        showEditProjectDialog,
+        closeEditProjectDialog,
+        addAndShowProject,
+        editAndShowProject,
+        deleteAndShowProject,
     }
 })();
 
