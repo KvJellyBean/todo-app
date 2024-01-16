@@ -10,7 +10,7 @@ import addProject from '../images/addProject.svg';
 const Sidebar = (() => {
     function initSidebar() {
         const sidebar = document.querySelector('nav');
-        
+
         // Create home & project menu
         const home = _createHomeContainer();
         const project = _createProjectContainer();
