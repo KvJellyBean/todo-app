@@ -272,7 +272,7 @@ main {
             border-radius: .5rem;
         }
 
-        & button.add-button {
+        & button.add-todo {
             display: flex;
             border-radius: 50%;
             position: fixed;
@@ -292,7 +292,7 @@ main {
             }
         }
 
-        & button.add-button:hover {
+        & button.add-todo:hover {
             background-color: yellow;
             transform: scale(1.2);
             transition: .3s ease;
@@ -407,7 +407,7 @@ dialog {
                 font-weight: 700;
             }
 
-            .create-project {
+            .submit-btn {
                 background-color: greenyellow;
             }
 

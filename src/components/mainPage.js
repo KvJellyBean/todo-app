@@ -16,11 +16,12 @@ const Main = (() => {
         todoWrapper.classList.add('todo-wrapper');
 
         // Create Dialogs
-        const projectDialog = _createProjectDialog();
+        const addProjectDialog = _createAddProjectDialog();
+        const editProjectDialog = _createEditProjectDialog();
         const todoDialog = _createTodoDialog();
 
         container.append(title, addButton, todoWrapper);
-        main.append(container, projectDialog, todoDialog);
+        main.append(container, addProjectDialog, editProjectDialog, todoDialog);
 
         // Event Handler
         EventHandler.mainPage();
@@ -34,7 +35,7 @@ const Main = (() => {
 
     function _createAddButton() {
         const button = document.createElement('button');
-        button.classList.add('add-button');
+        button.classList.add('add-todo');
         button.innerHTML = `
             <img src=${addTodo} alt="Add To Do Button" />
         `;
@@ -46,7 +47,7 @@ const Main = (() => {
         return container;
     }
 
-    function _createProjectDialog() {
+    function _createAddProjectDialog() {
         const dialog = document.createElement('dialog');
         dialog.id = 'project-dialog';
         dialog.innerHTML = `
@@ -59,8 +60,29 @@ const Main = (() => {
                 </div>
                 
                 <div class="button-group">
-                    <button type="submit" class="create-project">Create</button>
-                    <button type="button" class="cancel">Cancel</button>
+                    <button type="submit" class="submit-btn create-project">Create</button>
+                    <button type="button" class="cancel cancel-add-project">Cancel</button>
+                </div>
+            </form>
+        `;
+        return dialog;
+    }
+
+    function _createEditProjectDialog() {
+        const dialog = document.createElement('dialog');
+        dialog.id = 'project-dialog-edit';
+        dialog.innerHTML = `
+            <form>
+                <legend>Edit Project</legend>
+
+                <div class="input-group">
+                    <label for="project-name">Project Name: </label>
+                    <input type="text" name="project-name" id="project-name-edit" required placeholder="My Project">
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="submit-btn edit-project">Create</button>
+                    <button type="button" class="cancel cancel-edit-project">Cancel</button>
                 </div>
             </form>
         `;
