@@ -1,5 +1,6 @@
 import projectLogic from "./projectLogic.js";
 import todoLogic from "./todoLogic.js";
+import Todo from "./todo.js";
 import hash from "../images/hash.svg";
 import edit from "../images/edit.svg";
 import deleteIcon from "../images/delete.svg";
@@ -36,10 +37,12 @@ const DOM = (() => {
 
         todos.forEach(todo => {
             const container = document.createElement('div');
-            container.classList.add('todo-item');
+            container.classList.add('todo-item', todo.priority.toLowerCase());
+            container.dataset.todoProject = todo.project;
+            container.dataset.todoId = todo.id;
             container.innerHTML = `
                 <div class="checklist">
-                    <input type="checkbox" />
+                    <input type="checkbox" ${todo.status === true ? 'checked' : ''} />
                 </div>
                     
                 <h4 class="todo-title">
@@ -63,11 +66,26 @@ const DOM = (() => {
         return titleContainer;
     }
 
+    function renderSelectProject() {
+        const selects = document.querySelectorAll('#todo-project');
+        const projects = projectLogic.getProjectList();
+
+        selects.forEach(select => {
+            select.innerHTML = '';
+            projects.forEach(project => {
+                select.innerHTML += `
+                    <option value="${project.name}">${project.name}</option>
+                `
+            })
+        })
+    }
+
     // ========================= OTHER FUNCTION ========================= //
     // Function to show Project List (Title Of the projects)
     function showProject() {
         const projects = projectLogic.getProjectList();
         renderProject(projects);
+        renderSelectProject();
     }
 
     // Function to show All To Do List (For: Home - All Tasks)
@@ -120,7 +138,7 @@ const DOM = (() => {
 
     // Function to show Add Project Dialog
     function showAddProjectDialog() {
-        const dialog = document.querySelector('dialog#project-dialog');
+        const dialog = document.querySelector('dialog#project-dialog-add');
         const form = dialog.querySelector('form');
         form.reset();
         dialog.showModal();
@@ -128,7 +146,7 @@ const DOM = (() => {
 
     // Function to Close Add Project Dialog
     function closeAddProjectDialog() {
-        const dialog = document.querySelector('dialog#project-dialog');
+        const dialog = document.querySelector('dialog#project-dialog-add');
         dialog.close();
     }
 
@@ -143,6 +161,48 @@ const DOM = (() => {
     // Function to close Edit Project Dialog
     function closeEditProjectDialog() {
         const dialog = document.querySelector('dialog#project-dialog-edit');
+        dialog.close();
+    }
+
+    // Function to show Add To Do List Dialog
+    function showAddTodoDialog() {
+        const dialog = document.querySelector('dialog#todo-dialog-add');
+        const form = dialog.querySelector('form');
+        form.reset();
+        dialog.showModal();
+    }
+
+    // Function to close Add To Do List Dialog
+    function closeAddTodoDialog() {
+        const dialog = document.querySelector('dialog#todo-dialog-add');
+        dialog.close();
+    }
+
+    // Function to show Edit To Do List Dialog
+    function showEditTodoDialog() {
+        const dialog = document.querySelector('dialog#todo-dialog-edit');
+        const form = dialog.querySelector('form');
+        form.reset();
+        dialog.showModal();
+    }
+
+    // Function to close Edit To Do List Dialog
+    function closeEditTodoDialog() {
+        const dialog = document.querySelector('dialog#todo-dialog-edit');
+        dialog.close();
+    }
+
+    // Function to show Info To Do List Dialog
+    function showInfoTodoDialog() {
+        const dialog = document.querySelector('dialog#todo-dialog-info');
+        const form = dialog.querySelector('form');
+        form.reset();
+        dialog.showModal();
+    }
+
+    // Function to close Info To Do List Dialog
+    function closeInfoTodoDialog() {
+        const dialog = document.querySelector('dialog#todo-dialog-info');
         dialog.close();
     }
 
@@ -169,8 +229,48 @@ const DOM = (() => {
     // Function to edit and show the current all project
     function deleteAndShowProject(projectName) {
         projectLogic.deleteProject(projectName);
-        DOM.showProject();
-        DOM.showAllTodoList();
+        showProject();
+        showAllTodoList();
+    }
+
+    // Function to add and show to do list
+    function addAndShowTodo(e) {
+        e.preventDefault();
+        const todoTitle = document.querySelector('#todo-title').value;
+        const todoDescription = document.querySelector('#todo-description').value;
+        const todoDue = document.querySelector('#todo-due').value;
+        const todoPriority = document.querySelector('#todo-priority').value;
+        const todoProject = document.querySelector('#todo-project').value;
+        const todoStatus = false;
+
+        const todoObject = Todo(todoTitle, todoDescription, todoDue, todoPriority, todoProject, todoStatus);
+
+        todoLogic.addTodo(todoObject);
+        showProjectTodoList(todoObject.project);
+        closeAddTodoDialog();
+    }
+
+    // Function to edit and show to do list
+    function editAndShowTodo(e, oldName) {
+        e.preventDefault();
+        const newName = document.querySelector('#project-name-edit').value;
+        projectLogic.editProject(oldName, newName);
+        showProject();
+        showProjectTodoList(newName);
+        closeEditProjectDialog();
+    }
+
+    // Function to edit and show the current all project
+    function deleteAndShowTodo(projectName, todoId) {
+        todoLogic.deleteTodo(projectName, todoId);
+        showProjectTodoList(projectName);
+    }
+
+    // DOM Change/toggle the todo's status
+    function toggleStatus(e) {
+        const projectName = e.target.closest('.todo-item').dataset.todoProject;
+        const todoId = e.target.closest('.todo-item').dataset.todoId;
+        todoLogic.toggleTodoStatus(projectName, todoId);
     }
 
     return {
@@ -183,13 +283,15 @@ const DOM = (() => {
         showPriorityTodoList,
         showCompletedTodoList,
         showProjectTodoList,
-        showAddProjectDialog,
-        closeAddProjectDialog,
-        showEditProjectDialog,
-        closeEditProjectDialog,
-        addAndShowProject,
-        editAndShowProject,
-        deleteAndShowProject,
+        showAddProjectDialog, closeAddProjectDialog,
+        showEditProjectDialog, closeEditProjectDialog,
+        showAddTodoDialog, closeAddTodoDialog,
+        showEditTodoDialog, closeEditTodoDialog,
+        showInfoTodoDialog, closeInfoTodoDialog,
+        addAndShowProject, editAndShowProject, deleteAndShowProject,
+        addAndShowTodo, editAndShowTodo, deleteAndShowTodo,
+        toggleStatus,
+        renderSelectProject
     }
 })();
 
