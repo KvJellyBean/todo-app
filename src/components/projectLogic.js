@@ -1,14 +1,7 @@
 import Project from "./project";
+import Todo from "./todo";
 
 const projectLogic = (() => {
-    let defaultTodo = {
-        title: 'My Activity',
-        description: 'Activity description',
-        due: '2024-01-20',
-        priority: 'Low',
-        project: '',
-        status: false,
-    }
     let projectList = [{
         projectIndex: 0,
         name: 'First Project',
@@ -20,6 +13,7 @@ const projectLogic = (() => {
                 priority: 'Medium',
                 project: 'First Project',
                 status: true,
+                id: 123,
             },
             {
                 title: 'Title 2',
@@ -28,6 +22,7 @@ const projectLogic = (() => {
                 priority: 'High',
                 project: 'First Project',
                 status: false,
+                id: 124,
             },
             {
                 title: 'Title 3',
@@ -36,6 +31,7 @@ const projectLogic = (() => {
                 priority: 'Low',
                 project: 'First Project',
                 status: false,
+                id: 125,
             },
         ]
     }, {
@@ -49,6 +45,7 @@ const projectLogic = (() => {
                 priority: 'Low',
                 project: 'Second Project',
                 status: true,
+                id: 126,
             },
             {
                 title: '2 Title 2',
@@ -57,6 +54,7 @@ const projectLogic = (() => {
                 priority: 'Medium',
                 project: 'Second Project',
                 status: false,
+                id: 127,
             },
             {
                 title: '2 Title 3',
@@ -65,6 +63,7 @@ const projectLogic = (() => {
                 priority: 'High',
                 project: 'Second Project',
                 status: false,
+                id: 128,
             },
         ]
     }
@@ -108,8 +107,11 @@ const projectLogic = (() => {
      * @param {string} projectName - The name of the project.
      * @param {object | array objects} todos - The todos object to be added.
      */
-    function addProject(projectName, todos = defaultTodo) {
+    function addProject(projectName, todos = '') {
         const project = getProjectByName(projectName);
+        if (todos === '') {
+            todos = Todo('My New Activity', 'Activity description', '2024-01-20', 'Low', projectName, false);
+        }
 
         if (project === undefined) {
             todos.project = projectName;
@@ -119,7 +121,7 @@ const projectLogic = (() => {
         }
         else {
             console.log('Project already exists.');
-            // project.todos.push(todos);
+            project.todos.push(todos);
         }
     }
 
@@ -133,6 +135,9 @@ const projectLogic = (() => {
         const newProject = getProjectByName(newName);
         if (oldProject && !newProject) {
             oldProject.name = newName;
+            oldProject.todos.forEach(todo => {
+                todo.project = newName;
+            });
         } else if (oldProject && newProject) {
             console.log('Fail to edit, other Project was found.');
         }

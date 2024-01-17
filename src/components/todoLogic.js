@@ -53,7 +53,7 @@ const todoLogic = (() => {
         // Take the project todos
         const projectTodos = projectLogic.getProjectTodos(projectLogic.getProjectIndex(projectName));
         // Take the index of the todo that want to be removed
-        const todoIndex = projectTodos.findIndex(todo => todo.id === todoId);
+        const todoIndex = projectTodos.findIndex(todo => todo.id == todoId);
 
         if (todoIndex === -1) {
             console.log('There is no item with the input ID.');
@@ -64,13 +64,13 @@ const todoLogic = (() => {
     }
 
     /**
-     * Toggle the completion status of a todo.
+     * Toggle the status of a todo.
      * @param {string} projectName - The name of the project.
      * @param {number} todoId - The ID of the todo to be removed.
      */
-    function toggleTodoComplete(projectName, todoId) {
+    function toggleTodoStatus(projectName, todoId) {
         const projectTodos = projectLogic.getProjectTodos(projectLogic.getProjectIndex(projectName));
-        const todoIndex = projectTodos.findIndex(todo => todo.id === todoId);
+        const todoIndex = projectTodos.findIndex(todo => todo.id == todoId);
 
         if (todoIndex === -1) {
             console.log('There is no todo with the input ID.');
@@ -117,16 +117,17 @@ const todoLogic = (() => {
     function getPriorityTodos(projects) {
         const sortedTodos = [];
         const priorityArray = ["High", "Medium", "Low"];
-
+        const projectTodos = [];
         projects.forEach(project => {
-            const projectTodos = project.todos;
-            const todosSort = projectTodos.slice().sort(function (a, b) {
-                let firstPrio = priorityArray.indexOf(a.priority);
-                let secPrio = priorityArray.indexOf(b.priority);
-                return firstPrio - secPrio;
-            });
-            sortedTodos.push(todosSort);
+            projectTodos.push(project.todos);
         });
+
+        const todosSort = projectTodos.flat().slice().sort(function (a, b) {
+            let firstPrio = priorityArray.indexOf(a.priority);
+            let secPrio = priorityArray.indexOf(b.priority);
+            return firstPrio - secPrio;
+        });
+        sortedTodos.push(todosSort);
         return sortedTodos.flat();
     }
 
@@ -152,7 +153,7 @@ const todoLogic = (() => {
         addTodo,
         editTodo,
         deleteTodo,
-        toggleTodoComplete,
+        toggleTodoStatus,
         getAllTodos,
         getDateFilteredTodos,
         getPriorityTodos,
