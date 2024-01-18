@@ -37,7 +37,7 @@ const Sidebar = (() => {
     
                 <li><a href="#" class="today"><img class="today" src="${today}" alt="Today" />Today</a></li>
     
-                <li><a href="#" class="upcoming"><img class="upcoming" src="${upcoming}" alt="Upcoming" /> Upcoming</a></li>
+                <li><a href="#" class="this-week"><img class="this-week" src="${upcoming}" alt="This Week" /> This Week</a></li>
     
                 <li><a href="#" class="priority"><img class="priority" src="${priority}" alt="Priority" /> Priority</a></li>
     

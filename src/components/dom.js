@@ -104,12 +104,12 @@ const DOM = (() => {
         renderTodoList(todayTodos);
     }
 
-    // Function to show Upcoming To Do List (For: Home - Upcoming)
-    function showUpcomingTodoList() {
-        _renderTitle('Upcoming');
+    // Function to show This Week To Do List (For: Home - This Week)
+    function showThisWeekTodoList() {
+        _renderTitle('This Week');
         const projects = projectLogic.getProjectList();
-        const upcomingTodos = todoLogic.getDateFilteredTodos(projects, isThisWeek);
-        renderTodoList(upcomingTodos);
+        const thisWeekTodos = todoLogic.getDateFilteredTodos(projects, isThisWeek);
+        renderTodoList(thisWeekTodos);
     }
 
     // Function to show Priority[High to Low] To Do List (For: Home - Priority)
@@ -151,11 +151,13 @@ const DOM = (() => {
     }
 
     // Function to show Edit Project Dialog
-    function showEditProjectDialog() {
+    function showEditProjectDialog(oldName) {
         const dialog = document.querySelector('dialog#project-dialog-edit');
         const form = dialog.querySelector('form');
         form.reset();
         dialog.showModal();
+
+        document.querySelector('#project-name-edit').value = oldName;
     }
 
     // Function to close Edit Project Dialog
@@ -179,11 +181,18 @@ const DOM = (() => {
     }
 
     // Function to show Edit To Do List Dialog
-    function showEditTodoDialog() {
+    function showEditTodoDialog(projectName, todoId) {
         const dialog = document.querySelector('dialog#todo-dialog-edit');
         const form = dialog.querySelector('form');
         form.reset();
         dialog.showModal();
+
+        const todo = projectLogic.getTodo(projectName, todoId);
+        document.querySelector('#todo-title-edit').value = todo.title;
+        document.querySelector('#todo-description-edit').value = todo.description;
+        document.querySelector('#todo-due-edit').value = todo.due;
+        document.querySelector('#todo-priority-edit').value = todo.priority;
+        document.querySelector('#todo-project-edit').value = todo.project;
     }
 
     // Function to close Edit To Do List Dialog
@@ -300,7 +309,7 @@ const DOM = (() => {
         showProject,
         showAllTodoList,
         showTodayTodoList,
-        showUpcomingTodoList,
+        showThisWeekTodoList,
         showPriorityTodoList,
         showCompletedTodoList,
         showProjectTodoList,

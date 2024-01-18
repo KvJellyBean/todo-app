@@ -6,7 +6,7 @@ const EventHandler = (() => {
         // At Home nav
         ALL_TASK: '.all-tasks',
         TODAY: '.today',
-        UPCOMING: '.upcoming',
+        THIS_WEEK: '.this-week',
         PRIORITY: '.priority',
         COMPLETED: '.completed',
 
@@ -35,7 +35,7 @@ const EventHandler = (() => {
         document.addEventListener('DOMContentLoaded', () => {
             _createButtonFunctionality(_BUTTONS.ALL_TASK, DOM.showAllTodoList);
             _createButtonFunctionality(_BUTTONS.TODAY, DOM.showTodayTodoList);
-            _createButtonFunctionality(_BUTTONS.UPCOMING, DOM.showUpcomingTodoList);
+            _createButtonFunctionality(_BUTTONS.THIS_WEEK, DOM.showThisWeekTodoList);
             _createButtonFunctionality(_BUTTONS.PRIORITY, DOM.showPriorityTodoList);
             _createButtonFunctionality(_BUTTONS.COMPLETED, DOM.showCompletedTodoList);
         });
@@ -101,7 +101,7 @@ const EventHandler = (() => {
 
             if (e.target.matches(_BUTTONS.EDIT_PROJECT)) {
                 oldName = e.target.closest('li').dataset.projectName;
-                DOM.showEditProjectDialog();
+                DOM.showEditProjectDialog(oldName);
                 projectForm.addEventListener('submit', handleSubmit);
             }
         });
@@ -171,7 +171,6 @@ const EventHandler = (() => {
         let projectName, todoId;
 
         function handleSubmit(e) {
-            console.log(todoId);
             DOM.editAndShowTodo(e, projectName, todoId);
         }
 
@@ -181,7 +180,7 @@ const EventHandler = (() => {
             if (e.target.matches(_BUTTONS.EDIT_TODO)) {
                 projectName = e.target.closest('.todo-item').dataset.todoProject;
                 todoId = e.target.closest('.todo-item').dataset.todoId;
-                DOM.showEditTodoDialog();
+                DOM.showEditTodoDialog(projectName, todoId);
                 todoForm.addEventListener('submit', handleSubmit);
             }
         });
