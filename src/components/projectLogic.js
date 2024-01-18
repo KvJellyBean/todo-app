@@ -3,73 +3,80 @@ import Todo from "./todo";
 import { format } from 'date-fns';
 
 const projectLogic = (() => {
-    let projectList = [{
-        projectIndex: 0,
-        name: 'First Project',
-        todos: [
-            {
-                title: 'Title 1',
-                description: 'To Do Description 1',
-                due: '2024-01-15',
-                priority: 'Medium',
-                project: 'First Project',
-                status: true,
-                id: 123,
-            },
-            {
-                title: 'Title 2',
-                description: 'To Do Description 2',
-                due: '2024-01-15',
-                priority: 'High',
-                project: 'First Project',
-                status: false,
-                id: 124,
-            },
-            {
-                title: 'Title 3',
-                description: 'To Do Description 3',
-                due: '2024-01-21',
-                priority: 'Low',
-                project: 'First Project',
-                status: false,
-                id: 125,
-            },
-        ]
-    }, {
-        projectIndex: 1,
-        name: 'Second Project',
-        todos: [
-            {
-                title: '2 Title 1',
-                description: 'To Do Description 1',
-                due: '2024-01-20',
-                priority: 'Low',
-                project: 'Second Project',
-                status: true,
-                id: 126,
-            },
-            {
-                title: '2 Title 2',
-                description: 'To Do Description 2',
-                due: '2024-01-20',
-                priority: 'Medium',
-                project: 'Second Project',
-                status: false,
-                id: 127,
-            },
-            {
-                title: '2 Title 3',
-                description: 'To Do Description 3',
-                due: '2024-01-21',
-                priority: 'High',
-                project: 'Second Project',
-                status: false,
-                id: 128,
-            },
-        ]
+    // let projectList = [{
+    //     projectIndex: 0,
+    //     name: 'First Project',
+    //     todos: [
+    //         {
+    //             title: 'Title 1',
+    //             description: 'To Do Description 1',
+    //             due: '2024-01-15',
+    //             priority: 'Medium',
+    //             project: 'First Project',
+    //             status: true,
+    //             id: 123,
+    //         },
+    //         {
+    //             title: 'Title 2',
+    //             description: 'To Do Description 2',
+    //             due: '2024-01-15',
+    //             priority: 'High',
+    //             project: 'First Project',
+    //             status: false,
+    //             id: 124,
+    //         },
+    //         {
+    //             title: 'Title 3',
+    //             description: 'To Do Description 3',
+    //             due: '2024-01-21',
+    //             priority: 'Low',
+    //             project: 'First Project',
+    //             status: false,
+    //             id: 125,
+    //         },
+    //     ]
+    // }, {
+    //     projectIndex: 1,
+    //     name: 'Second Project',
+    //     todos: [
+    //         {
+    //             title: '2 Title 1',
+    //             description: 'To Do Description 1',
+    //             due: '2024-01-20',
+    //             priority: 'Low',
+    //             project: 'Second Project',
+    //             status: true,
+    //             id: 126,
+    //         },
+    //         {
+    //             title: '2 Title 2',
+    //             description: 'To Do Description 2',
+    //             due: '2024-01-20',
+    //             priority: 'Medium',
+    //             project: 'Second Project',
+    //             status: false,
+    //             id: 127,
+    //         },
+    //         {
+    //             title: '2 Title 3',
+    //             description: 'To Do Description 3',
+    //             due: '2024-01-21',
+    //             priority: 'High',
+    //             project: 'Second Project',
+    //             status: false,
+    //             id: 128,
+    //         },
+    //     ]
+    // }
+    // ];
+    let projectList = [];
+    let numOfProject;
+    const STORAGE_KEY = 'Jellist_projectList';
+
+    if (isStorageAvailable()) {
+        loadProjectList();
+        numOfProject = projectList.length;
     }
-    ];
-    let numOfProject = projectList.length;
 
     // ========================= GETTER & SETTER ========================= //
     // Main Getter & Setter
@@ -124,6 +131,7 @@ const projectLogic = (() => {
             console.log('Project already exists.');
             project.todos.push(todos);
         }
+        saveData();
     }
 
     /**
@@ -142,6 +150,7 @@ const projectLogic = (() => {
         } else if (oldProject && newProject) {
             console.log('Fail to edit, other Project was found.');
         }
+        saveData();
     }
 
     /**
@@ -157,6 +166,7 @@ const projectLogic = (() => {
         } else {
             console.log('Project Not Found.');
         }
+        saveData();
     }
 
     /**
@@ -169,13 +179,44 @@ const projectLogic = (() => {
         }
     }
 
+    // Local Storage Implementation
+    function isStorageAvailable() {
+        if (typeof (localStorage) === undefined) {
+            console.log("Local Storage Not Supported.");
+            return false;
+        }
+        return true;
+    }
+
+    function saveData() {
+        if (isStorageAvailable()) {
+            const parsedData = JSON.stringify(getProjectList());
+            localStorage.setItem(STORAGE_KEY, parsedData);
+        }
+    }
+
+    function loadProjectList() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        const parsedData = JSON.parse(data);
+        console.log(parsedData);
+
+        if (parsedData !== null && parsedData.length !== 0) {
+            projectList = parsedData;
+        } else {
+            const todo = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd'), 'Low', 'Inbox', false);
+            projectList = [Project(0, 'Inbox', [todo])];
+            saveData();
+        }
+    }
+
     return {
         getProjectList, getNumOfProject,
         setNumOfProject,
         getProjectByName, getProjectIndex, getProjectTodos, getTodo,
         addProject,
         editProject,
-        deleteProject
+        deleteProject,
+        isStorageAvailable, saveData,
     }
 })();
 

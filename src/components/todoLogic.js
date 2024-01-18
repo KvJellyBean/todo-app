@@ -44,6 +44,7 @@ const todoLogic = (() => {
             }
             newProject.todos.push(todo);
         }
+        projectLogic.saveData();
     }
 
     /**
@@ -63,6 +64,7 @@ const todoLogic = (() => {
         }
 
         projectTodos.splice(todoIndex, 1);
+        projectLogic.saveData();
     }
 
     /**
@@ -80,6 +82,7 @@ const todoLogic = (() => {
         }
 
         projectTodos[todoIndex].status = !projectTodos[todoIndex].status;
+        projectLogic.saveData();
     }
 
     /**
@@ -104,7 +107,7 @@ const todoLogic = (() => {
         const filteredTodos = []
         projects.forEach(project => {
             project.todos.forEach(todo => {
-                if (dateFilter(format(todo.due, 'MM/dd/yyyy'))) {
+                if (dateFilter(format(todo.due, 'MM/dd/yyyy'), { weekStartsOn: 1 })) {
                     filteredTodos.push(todo);
                 }
             })
