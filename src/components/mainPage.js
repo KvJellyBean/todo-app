@@ -122,7 +122,7 @@ const Main = (() => {
                 </div>
                 <div class="input-group">
                     <label for="todo-project">Project: </label>
-                    <select name="todo-project" id="todo-project" required>
+                    <select name="todo-project" id="todo-project" class="todo-project" required>
                         
                     </select>
                 </div>
@@ -144,8 +144,30 @@ const Main = (() => {
                 <legend>Edit To Do List</legend>
 
                 <div class="input-group">
-                    <label for="project-name">Project Name: </label>
-                    <input type="text" name="project-name" id="project-name-edit" required placeholder="My Project">
+                    <label for="todo-title-edit">To Do: </label>
+                    <input type="text" name="todo-title-edit" id="todo-title-edit" required placeholder="My Activity">
+                </div>
+                <div class="input-group">
+                    <label for="todo-description-edit">Description: </label>
+                    <textarea name="todo-description-edit" id="todo-description-edit" required placeholder="Detail information of My Activity"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="todo-due-edit">Due Date: </label>
+                    <input type="date" name="todo-due-edit" id="todo-due-edit" required>
+                </div>
+                <div class="input-group">
+                    <label for="todo-priority-edit">Priority: </label>
+                    <select name="todo-priority-edit" id="todo-priority-edit" required">
+                        <option value="High" selected>High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="todo-project-edit">Project: </label>
+                    <select name="todo-project-edit" id="todo-project-edit" class="todo-project" required>
+                        
+                    </select>
                 </div>
                 
                 <div class="button-group">
@@ -161,7 +183,45 @@ const Main = (() => {
         const dialog = document.createElement('dialog');
         dialog.id = 'todo-dialog-info';
         dialog.innerHTML = `
-        
+            <div class="info-container">
+                <hr>
+                <h4>Detail</h4>
+                <hr>
+                <div class="info-group" id="todo-title-info">
+                    <h5>To Do:</h5>
+                    <p></p>
+                </div>
+
+                <div class="info-group" id="todo-description-info">
+                    <h5>Description:</h5>
+                    <p></p>
+                </div>
+
+                <div class="info-group" id="todo-due-info">
+                    <h5>Due Date:</h5>
+                    <p></p>
+                </div>
+
+                <div class="info-group" id="todo-priority-info">
+                    <h5>Priority Level:</h5>
+                    <p></p>
+                </div>
+
+                <div class="info-group" id="todo-project-info">
+                    <h5>Project:</h5>
+                    <p></p>
+                </div>
+
+                <div class="info-group" id="todo-status-info">
+                    <h5>Status:</h5>
+                    <p></p>
+                </div>
+                <hr>
+
+                <div class="button-group">
+                    <button type="button" class="confirm">Confirm</button>
+                </div>
+            </div>
         `;
         return dialog;
     }
