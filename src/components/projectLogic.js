@@ -1,5 +1,6 @@
 import Project from "./project";
 import Todo from "./todo";
+import { format } from 'date-fns';
 
 const projectLogic = (() => {
     let projectList = [{
@@ -98,7 +99,7 @@ const projectLogic = (() => {
         return getProjectList()[index].todos;
     }
     function getTodo(projectName, id) {
-        return getProjectTodos(getProjectIndex(projectName)).find(todo => todo.id === id);
+        return getProjectTodos(getProjectIndex(projectName)).find(todo => todo.id == id);
     }
 
     // ========================= PROJECT LOGIC FUNCTIONS ========================= //
@@ -110,7 +111,7 @@ const projectLogic = (() => {
     function addProject(projectName, todos = '') {
         const project = getProjectByName(projectName);
         if (todos === '') {
-            todos = Todo('My New Activity', 'Activity description', '2024-01-20', 'Low', projectName, false);
+            todos = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd'), 'Low', projectName, false);
         }
 
         if (project === undefined) {

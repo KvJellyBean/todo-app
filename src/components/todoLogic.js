@@ -19,6 +19,7 @@ const todoLogic = (() => {
      */
     function editTodo(projectName, todoId, newTodo) {
         const todo = projectLogic.getTodo(projectName, todoId);
+        const oldStatus = todo.status;
 
         if (todo === undefined) {
             console.log('There is no item with the input ID.');
@@ -27,6 +28,7 @@ const todoLogic = (() => {
 
         Object.assign(todo, newTodo);
         todo.id = todoId;
+        todo.status = oldStatus;
 
         // Check if projectname is different than before, than move it to those project
         if (newTodo.project !== projectName) {
