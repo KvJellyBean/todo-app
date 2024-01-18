@@ -67,7 +67,7 @@ const DOM = (() => {
     }
 
     function renderSelectProject() {
-        const selects = document.querySelectorAll('#todo-project');
+        const selects = document.querySelectorAll('.todo-project');
         const projects = projectLogic.getProjectList();
 
         selects.forEach(select => {
@@ -193,10 +193,24 @@ const DOM = (() => {
     }
 
     // Function to show Info To Do List Dialog
-    function showInfoTodoDialog() {
+    function showInfoTodoDialog(projectName, todoId) {
         const dialog = document.querySelector('dialog#todo-dialog-info');
-        const form = dialog.querySelector('form');
-        form.reset();
+        const todo = projectLogic.getTodo(projectName, todoId);
+
+        const todoTitle = document.querySelector('#todo-title-info p');
+        const todoDescription = document.querySelector('#todo-description-info p');
+        const todoDue = document.querySelector('#todo-due-info p');
+        const todoPriority = document.querySelector('#todo-priority-info p');
+        const todoProject = document.querySelector('#todo-project-info p');
+        const todoStatus = document.querySelector('#todo-status-info p');
+
+        todoTitle.innerText = todo.title;
+        todoDescription.innerText = todo.description;
+        todoDue.innerText = todo.due;
+        todoPriority.innerText = todo.priority;
+        todoProject.innerText = todo.project;
+        todoStatus.innerText = todo.status ? 'Completed' : 'Not Completed';
+
         dialog.showModal();
     }
 
@@ -250,14 +264,21 @@ const DOM = (() => {
         closeAddTodoDialog();
     }
 
-    // Function to edit and show to do list
-    function editAndShowTodo(e, oldName) {
+    // Function to edit and show to do list 
+    function editAndShowTodo(e, projectName, todoId) {
         e.preventDefault();
-        const newName = document.querySelector('#project-name-edit').value;
-        projectLogic.editProject(oldName, newName);
-        showProject();
-        showProjectTodoList(newName);
-        closeEditProjectDialog();
+        const todoTitle = document.querySelector('#todo-title-edit').value;
+        const todoDescription = document.querySelector('#todo-description-edit').value;
+        const todoDue = document.querySelector('#todo-due-edit').value;
+        const todoPriority = document.querySelector('#todo-priority-edit').value;
+        const todoProject = document.querySelector('#todo-project-edit').value;
+        const todoStatus = false;
+
+        const todoObject = Todo(todoTitle, todoDescription, todoDue, todoPriority, todoProject, todoStatus);
+
+        todoLogic.editTodo(projectName, todoId, todoObject);
+        showProjectTodoList(todoObject.project);
+        closeEditTodoDialog();
     }
 
     // Function to edit and show the current all project

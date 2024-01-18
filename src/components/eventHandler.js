@@ -25,7 +25,7 @@ const EventHandler = (() => {
         CANCEL_EDIT_TODO: '.cancel-edit-todo',
         DELETE_TODO: '.delete',
         INFO_TODO: '.info',
-        CLOSE_INFO_TODO: '.close-info-todo',
+        CONFIRM_INFO_TODO: '.confirm',
         CHECKLIST_TODO: '.checklist input',
         TODO_LIST: '.todo-title',
     }
@@ -55,16 +55,15 @@ const EventHandler = (() => {
     // ========================= MAIN PAGE EVENT HANDLER ========================= //
     function mainPage() {
         document.addEventListener('DOMContentLoaded', () => {
-
             _checklistButton();
             _todoListButton();
             _addTodoButton();
-            // _editTodoButton();
+            _editTodoButton();
             _deleteTodoButton();
-            // _infoTodoButton();
+            _infoTodoButton();
             _createButtonFunctionality(_BUTTONS.CANCEL_ADD_TODO, DOM.closeAddTodoDialog);
             _createButtonFunctionality(_BUTTONS.CANCEL_EDIT_TODO, DOM.closeEditTodoDialog);
-            // _createButtonFunctionality(_BUTTONS.CLOSE_INFO_TODO, DOM.closeInfoTodoDialog);
+            _createButtonFunctionality(_BUTTONS.CONFIRM_INFO_TODO, DOM.closeInfoTodoDialog);
         });
     }
 
@@ -90,6 +89,7 @@ const EventHandler = (() => {
     // Event handler for 'Edit Project'
     function _editProjectButton() {
         const projectList = document.querySelector('#project-list');
+        const projectForm = document.querySelector('#project-dialog-edit form');
         let oldName;
 
         function handleSubmit(e) {
@@ -97,12 +97,12 @@ const EventHandler = (() => {
         }
 
         projectList.addEventListener('click', (e) => {
-            oldName = e.target.closest('li').dataset.projectName;
-            document.querySelector('#project-dialog-edit form').removeEventListener('submit', handleSubmit);
+            projectForm.removeEventListener('submit', handleSubmit);
 
             if (e.target.matches(_BUTTONS.EDIT_PROJECT)) {
+                oldName = e.target.closest('li').dataset.projectName;
                 DOM.showEditProjectDialog();
-                document.querySelector('#project-dialog-edit form').addEventListener('submit', handleSubmit);
+                projectForm.addEventListener('submit', handleSubmit);
             }
         });
     }
@@ -164,22 +164,35 @@ const EventHandler = (() => {
         });
     }
 
-    // function _editTodoButton() {
-    //     const todoWrapper = document.querySelector('.todo-wrapper');
+    // Fvent handler for Edit To Do
+    function _editTodoButton() {
+        const todoWrapper = document.querySelector('.todo-wrapper');
+        const todoForm = document.querySelector('#todo-dialog-edit form');
+        let projectName, todoId;
 
-    //     todoWrapper.addEventListener('click', (e) => {
-    //         if (e.target.className === _BUTTONS.EDIT_TODO) {
-    //             DOM.showEditTodoDialog();
-    //         }
-    //     });
-    // }
+        function handleSubmit(e) {
+            console.log(todoId);
+            DOM.editAndShowTodo(e, projectName, todoId);
+        }
+
+        todoWrapper.addEventListener('click', (e) => {
+            todoForm.removeEventListener('submit', handleSubmit);
+
+            if (e.target.matches(_BUTTONS.EDIT_TODO)) {
+                projectName = e.target.closest('.todo-item').dataset.todoProject;
+                todoId = e.target.closest('.todo-item').dataset.todoId;
+                DOM.showEditTodoDialog();
+                todoForm.addEventListener('submit', handleSubmit);
+            }
+        });
+    }
 
     // Fvent handler for Delete To Do
     function _deleteTodoButton() {
         const todoWrapper = document.querySelector('.todo-wrapper');
 
         todoWrapper.addEventListener('click', (e) => {
-            if (e.target.className === _BUTTONS.DELETE_TODO) {
+            if (e.target.matches(_BUTTONS.DELETE_TODO)) {
                 const projectName = e.target.closest('.todo-item').dataset.todoProject;
                 const todoId = e.target.closest('.todo-item').dataset.todoId;
                 DOM.deleteAndShowTodo(projectName, todoId);
@@ -187,15 +200,18 @@ const EventHandler = (() => {
         });
     }
 
-    // function _infoTodoButton() {
-    //     const todoWrapper = document.querySelector('.todo-wrapper');
+    // Fvent handler to show detail of the to do list
+    function _infoTodoButton() {
+        const todoWrapper = document.querySelector('.todo-wrapper');
 
-    //     todoWrapper.addEventListener('click', (e) => {
-    //         if (e.target.className === _BUTTONS.INFO_TODO) {
-    //             DOM.showInfoTodoDialog();
-    //         }
-    //     });
-    // }
+        todoWrapper.addEventListener('click', (e) => {
+            if (e.target.matches(_BUTTONS.INFO_TODO)) {
+                const projectName = e.target.closest('.todo-item').dataset.todoProject;
+                const todoId = e.target.closest('.todo-item').dataset.todoId;
+                DOM.showInfoTodoDialog(projectName, todoId);
+            }
+        });
+    }
 
     return {
         homeSidebar,
