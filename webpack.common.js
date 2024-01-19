@@ -34,6 +34,9 @@ module.exports = {
             fileName: 'index.html',
             title: 'Todo List App',
             templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"content\"></div></body></html>',
+            meta: {
+                viewport: 'width=device-width, initial-scale=1.0'
+            }
         }),
     ]
 }
