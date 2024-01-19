@@ -5,6 +5,7 @@ import hash from "../images/hash.svg";
 import edit from "../images/edit.svg";
 import deleteIcon from "../images/delete.svg";
 import info from "../images/info.svg";
+import empty from "../images/empty.svg";
 import { format, isToday, isThisWeek } from 'date-fns';
 
 const DOM = (() => {
@@ -35,6 +36,16 @@ const DOM = (() => {
         const todosWrapper = document.querySelector('.todo-wrapper');
         todosWrapper.innerHTML = '';
 
+        if (todos.length === 0) {
+            const emptyContainer = document.createElement('div');
+            emptyContainer.classList.add('empty-container');
+            emptyContainer.innerHTML = `
+                <img src="${empty}" alt="Nothing to do" />
+            `;
+            todosWrapper.append(emptyContainer);
+            return;
+        }
+
         todos.forEach(todo => {
             const container = document.createElement('div');
             container.classList.add('todo-item', todo.priority.toLowerCase());
@@ -42,12 +53,14 @@ const DOM = (() => {
             container.dataset.todoId = todo.id;
             container.innerHTML = `
                 <div class="checklist">
-                    <input type="checkbox" ${todo.status === true ? 'checked' : ''} />
+                    <input id="${todo.id}" type="checkbox" ${todo.status === true ? 'checked' : ''} />
+                    <label for="${todo.id}"></label>
                 </div>
                     
-                <h4 class="todo-title">
-                    ${todo.title}
-                </h4>
+                <div class="todo-title">
+                <h4 class="todo-title">${todo.title}</h4>
+                <p class="todo-title">Due date: ${todo.due}</p>
+                </div>
                 
                 <div class="menu">
                         <img class="edit" src=${edit} alt="Edit" />
