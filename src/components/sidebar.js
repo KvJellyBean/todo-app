@@ -30,6 +30,7 @@ const Sidebar = (() => {
         container.id = 'home-nav';
         container.classList.add('sidebar');
         container.innerHTML = `
+            <hr>    
             <h2>Home</h2>
             <hr>    
             <ul id="home-categories">
@@ -53,6 +54,7 @@ const Sidebar = (() => {
         container.id = 'project-nav';
         container.classList.add('sidebar');
         container.innerHTML = `
+            <hr>
             <div class="project-container">
                 <h2>Project</h2>
                 <img class="add-project" src="${addProject}" alt="Add Project" />

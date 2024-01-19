@@ -97,41 +97,42 @@ const Main = (() => {
         const dialog = document.createElement('dialog');
         dialog.id = 'todo-dialog-add';
         dialog.innerHTML = `
-            <form>
-                <legend>Add To Do List</legend>
-
-                <div class="input-group">
-                    <label for="todo-title">To Do: </label>
-                    <input type="text" name="todo-title" id="todo-title" required placeholder="My Activity">
-                </div>
-                <div class="input-group">
-                    <label for="todo-description">Description: </label>
-                    <textarea name="todo-description" id="todo-description" required placeholder="Detail information of My Activity"></textarea>
-                </div>
-                <div class="input-group">
-                    <label for="todo-due">Due Date: </label>
-                    <input type="date" name="todo-due" id="todo-due" required>
-                </div>
-                <div class="input-group">
-                    <label for="todo-priority">Priority: </label>
-                    <select name="todo-priority" id="todo-priority" required">
-                        <option value="High" selected>High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="todo-project">Project: </label>
-                    <select name="todo-project" id="todo-project" class="todo-project" required>
-                        
-                    </select>
-                </div>
-                
-                <div class="button-group">
-                    <button type="submit" class="submit-btn">Create</button>
-                    <button type="button" class="cancel cancel-add-todo">Cancel</button>
-                </div>
-            </form>
+                <form>
+                    <legend>Add To Do List</legend>
+                    <div class="form-wrapper">
+                        <div class="input-group">
+                            <label for="todo-title">To Do: </label>
+                            <input type="text" name="todo-title" id="todo-title" required placeholder="My Activity">
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-description">Description: </label>
+                            <textarea name="todo-description" id="todo-description" required placeholder="Detail information of My Activity"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-due">Due Date: </label>
+                            <input type="date" name="todo-due" id="todo-due" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-priority">Priority: </label>
+                            <select name="todo-priority" id="todo-priority" required">
+                                <option value="High" selected>High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-project">Project: </label>
+                            <select name="todo-project" id="todo-project" class="todo-project" required>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="submit" class="submit-btn">Create</button>
+                        <button type="button" class="cancel cancel-add-todo">Cancel</button>
+                    </div>
+                </form>
         `;
         return dialog;
     }
@@ -140,41 +141,45 @@ const Main = (() => {
         const dialog = document.createElement('dialog');
         dialog.id = 'todo-dialog-edit';
         dialog.innerHTML = `
-            <form>
-                <legend>Edit To Do List</legend>
+            <div class="form-wrapper">
+                <form>
+                    <legend>Edit To Do List</legend>
 
-                <div class="input-group">
-                    <label for="todo-title-edit">To Do: </label>
-                    <input type="text" name="todo-title-edit" id="todo-title-edit" required placeholder="My Activity">
-                </div>
-                <div class="input-group">
-                    <label for="todo-description-edit">Description: </label>
-                    <textarea name="todo-description-edit" id="todo-description-edit" required placeholder="Detail information of My Activity"></textarea>
-                </div>
-                <div class="input-group">
-                    <label for="todo-due-edit">Due Date: </label>
-                    <input type="date" name="todo-due-edit" id="todo-due-edit" required>
-                </div>
-                <div class="input-group">
-                    <label for="todo-priority-edit">Priority: </label>
-                    <select name="todo-priority-edit" id="todo-priority-edit" required">
-                        <option value="High" selected>High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="todo-project-edit">Project: </label>
-                    <select name="todo-project-edit" id="todo-project-edit" class="todo-project" required>
+                    <div class="form-wrapper">
+                        <div class="input-group">
+                            <label for="todo-title-edit">To Do: </label>
+                            <input type="text" name="todo-title-edit" id="todo-title-edit" required placeholder="My Activity">
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-description-edit">Description: </label>
+                            <textarea name="todo-description-edit" id="todo-description-edit" required placeholder="Detail information of My Activity"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-due-edit">Due Date: </label>
+                            <input type="date" name="todo-due-edit" id="todo-due-edit" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-priority-edit">Priority: </label>
+                            <select name="todo-priority-edit" id="todo-priority-edit" required">
+                                <option value="High" selected>High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-project-edit">Project: </label>
+                            <select name="todo-project-edit" id="todo-project-edit" class="todo-project" required>
+                                
+                            </select>
+                        </div>
+                    </div>
                         
-                    </select>
-                </div>
-                
-                <div class="button-group">
-                    <button type="submit" class="submit-btn">Apply</button>
-                    <button type="button" class="cancel cancel-edit-todo">Cancel</button>
-                </div>
-            </form>
+                    <div class="button-group">
+                        <button type="submit" class="submit-btn">Apply</button>
+                        <button type="button" class="cancel cancel-edit-todo">Cancel</button>
+                    </div>
+                </form>
+            </div>
         `;
         return dialog;
     }
@@ -184,9 +189,7 @@ const Main = (() => {
         dialog.id = 'todo-dialog-info';
         dialog.innerHTML = `
             <div class="info-container">
-                <hr>
                 <h4>Detail</h4>
-                <hr>
                 <div class="info-group" id="todo-title-info">
                     <h5>To Do:</h5>
                     <p></p>
