@@ -56,6 +56,7 @@ body {
     grid-template-rows: auto 1fr auto;
     height: 100dvh;
     position: relative;
+    overflow: hidden;
 }
 
 /* Header */
@@ -157,6 +158,8 @@ header {
 
 /* Nav (Sidebar) */
 nav {
+    overflow-y: auto;
+    overflow-x: hidden;
     background-color: var(--primary);
     color: #fff;
     grid-column: 1/2;
@@ -478,7 +481,8 @@ dialog {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 1rem;
-    overflow: hidden;
+    overflow: auto;
+    overflow-x: hidden;
 
     & form {
         display: flex;
@@ -730,11 +734,18 @@ footer {
     background: linear-gradient(var(--secondary), var(--accent));
 }
 
+@media screen and (max-width: 1400px) {
+    #content {
+        grid-template-columns: .3fr 1fr;
+    }
+}
+
 /* MEDIA QUERY */
-@media screen and (max-width: 695px) {
+@media screen and (max-width: 768px) {
     #content {
         display: flex;
         flex-direction: column;
+        overflow: auto;
     }
 
     header {
