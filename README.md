@@ -12,7 +12,7 @@
   <p align="center">
     A responsive to-do list application that prioritizes and categorizes tasks effortlessly for enhanced productivity.
     <br />
-    <a href="https://github.com/KvJellyBean/todo-app">View Demo</a>
+    <a href="https://kvjellybean.github.io/todo-app/">View Demo</a>
     ·
     <a href="https://github.com/KvJellyBean/todo-app/issues">Report Bug</a>
 </div>
@@ -129,4 +129,4 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[product-gif]: assets/todoapp.gif
+[product-gif]: ./src/images/todoapp.gif
