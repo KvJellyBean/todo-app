@@ -107,7 +107,7 @@ const todoLogic = (() => {
         const filteredTodos = []
         projects.forEach(project => {
             project.todos.forEach(todo => {
-                if (dateFilter(format(todo.due, 'MM/dd/yyyy'), { weekStartsOn: 1 })) {
+                if (dateFilter(todo.due, { weekStartsOn: 1 })) {
                     filteredTodos.push(todo);
                 }
             })

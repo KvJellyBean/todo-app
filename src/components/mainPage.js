@@ -110,7 +110,7 @@ const Main = (() => {
                         </div>
                         <div class="input-group">
                             <label for="todo-due">Due Date: </label>
-                            <input type="date" name="todo-due" id="todo-due" required>
+                            <input type="datetime-local" name="todo-due" id="todo-due" required>
                         </div>
                         <div class="input-group">
                             <label for="todo-priority">Priority: </label>
@@ -156,7 +156,7 @@ const Main = (() => {
                         </div>
                         <div class="input-group">
                             <label for="todo-due-edit">Due Date: </label>
-                            <input type="date" name="todo-due-edit" id="todo-due-edit" required>
+                            <input type="datetime-local" name="todo-due-edit" id="todo-due-edit" required>
                         </div>
                         <div class="input-group">
                             <label for="todo-priority-edit">Priority: </label>

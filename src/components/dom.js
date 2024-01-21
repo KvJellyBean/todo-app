@@ -51,6 +51,7 @@ const DOM = (() => {
             container.classList.add('todo-item', todo.priority.toLowerCase());
             container.dataset.todoProject = todo.project;
             container.dataset.todoId = todo.id;
+            const formatedDate = format(todo.due, 'dd/MM/yyyy HH:mm a');
             container.innerHTML = `
                 <div class="checklist">
                     <input id="${todo.id}" type="checkbox" ${todo.status === true ? 'checked' : ''} />
@@ -59,7 +60,7 @@ const DOM = (() => {
                     
                 <div class="todo-title">
                 <h4 class="todo-title">${todo.title}</h4>
-                <p class="todo-title">Due date: ${todo.due}</p>
+                <p class="todo-title">Due date: ${formatedDate}</p>
                 </div>
                 
                 <div class="menu">
@@ -98,6 +99,7 @@ const DOM = (() => {
     function showProject() {
         const projects = projectLogic.getProjectList();
         renderProject(projects);
+        console.log(projects);
         renderSelectProject();
     }
 
@@ -228,7 +230,7 @@ const DOM = (() => {
 
         todoTitle.innerText = todo.title;
         todoDescription.innerText = todo.description;
-        todoDue.innerText = todo.due;
+        todoDue.innerText = format(todo.due, 'dd/MM/yyyy HH:mm a');
         todoPriority.innerText = todo.priority;
         todoProject.innerText = todo.project;
         todoStatus.innerText = todo.status ? 'Completed' : 'Not Completed';

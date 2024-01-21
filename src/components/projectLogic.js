@@ -52,7 +52,7 @@ const projectLogic = (() => {
     function addProject(projectName, todos = '') {
         const project = getProjectByName(projectName);
         if (todos === '') {
-            todos = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd'), 'Low', projectName, false);
+            todos = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd\'T\'HH:mm'), 'Low', projectName, false);
         }
 
         if (project === undefined) {
@@ -136,7 +136,7 @@ const projectLogic = (() => {
         if (parsedData !== null && parsedData.length !== 0) {
             projectList = parsedData;
         } else {
-            const todo = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd'), 'Low', 'Inbox', false);
+            const todo = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd\'T\'HH:mm'), 'Low', 'Inbox', false);
             projectList = [Project(0, 'Inbox', [todo])];
             saveData();
         }
