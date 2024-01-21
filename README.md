@@ -4,17 +4,17 @@
 <br />
 <div align="center">
   <a href="https://github.com/KvJellyBean/todo-app">
-    <img src="./assets/logoBanner.png" alt="Logo Banner">
+    <img src="./src/images/logoBanner.jpeg" alt="Logo Banner">
   </a>
 
 <h3 align="center">Jellist</h3>
 
   <p align="center">
-    Responsive Tic-Tac-Toe game with dual player and AI modes.
+    A responsive to-do list application that prioritizes and categorizes tasks effortlessly for enhanced productivity.
     <br />
-    <a href="https://github.com/KvJellyBean/tic-tac-toe">View Demo</a>
+    <a href="https://github.com/KvJellyBean/todo-app">View Demo</a>
     ·
-    <a href="https://github.com/KvJellyBean/tic-tac-toe/issues">Report Bug</a>
+    <a href="https://github.com/KvJellyBean/todo-app/issues">Report Bug</a>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -41,9 +41,9 @@
 
 ## About The Project
 
-[![Tic-Tac-Toe GIF][product-screenshot]](https://github.com/KvJellyBean/tic-tac-toe)
+[![Jellist GIF][product-gif]](https://github.com/KvJellyBean/todo-app)
 
-Immerse yourself in the classic game of Tic-Tac-Toe, brought to life with HTML, CSS, and JavaScript. This project offers a responsive design for seamless gameplay, whether you're challenging a friend or facing off against a simple AI opponent. Enjoy the nostalgia of the game enhanced with a touch of modern web development.
+Introducing Jellist, a responsive task management app that goes beyond the basics. View all your tasks with ease, and navigate effortlessly through specific categories such as tasks for today, tasks for the week, completed tasks, and prioritize based on urgency. Tailor your experience by organizing tasks according to specific projects you've created. Jellist ensures a seamless and organized task management experience, empowering you to stay on top of your daily responsibilities.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -51,17 +51,29 @@ Immerse yourself in the classic game of Tic-Tac-Toe, brought to life with HTML, 
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+Quickly set up a local copy by following these simple steps for a seamless start.
 
 ### Prerequisites
 
 - Web browser (Google Chrome recommended)
+- Node package manager (npm)
+  ```sh
+  npm install npm@latest -g
+  ```
 
 ### Installation
 
 - Clone the repository to your local machine
   ```sh
-    git clone https://github.com/KvJellyBean/tic-tac-toe.git
+    git clone https://github.com/KvJellyBean/todo-app.git
+  ```
+- Navigate to your local project
+  ```sh
+  cd todo-app
+  ```
+- Install dependencies
+  ```sh
+    npm install
   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -70,10 +82,11 @@ To get a local copy up and running follow these simple example steps.
 
 ## Usage
 
-- Open the folder project on your local
-- Open the `index.html` file in web browser to launch the game
-- Click `START` and choose the mode by filling the players' name form (Empty the second field to play VS AI.)
-- Tap `START GAME` to begin the game
+- Build and start the project
+  ```sh
+    npm run start
+  ```
+- If the project is not yet open, open it using `http://localhost:8080`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -81,12 +94,20 @@ To get a local copy up and running follow these simple example steps.
 
 ## Roadmap
 
-- [x] Create the game design and animation
-- [x] Implement the tic-tac-toe game flow
-- [x] Integrate AI opponent
-  - [x] Simple AI (Random Pick)
-  - [ ] Hard AI (Minimax Algorithm)
-- [x] Add restart and quit game menu options
+- [x] Create Task (to-do list) logic
+  - [x] Add, edit and delete task
+  - [x] Show detailed information for each task
+  - [x] Toggle the status of to-do list items
+- [x] Create Project logic
+  - [x] Add, rename and delete Project
+- [x] Realtime integration
+  - [x] Utilize `date-fns` plugin for handling dates
+  - [x] Implement real-time updates for due dates
+- [x] Implement local storage
+- [x] Categorization
+  - [x] Add navigation categories for task (`All Task` `Today` `This Week` `Priority` `Completed`)
+  - [x] Add navitagion tab for `Project` to show each project's to do list
+- [x] Responsive Web Design
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -108,4 +129,4 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[product-screenshot]: assets/tictactoe.gif
+[product-gif]: assets/todoapp.gif
