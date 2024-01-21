@@ -198,14 +198,19 @@ nav {
 
         & ul#project-list {
             max-height: 15rem;
-            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             padding: .1rem;
+            overflow: auto;
             overflow-wrap: anywhere;
 
             & li {
-                gap: .5rem;
-                padding-right: .5rem;
-                align-items: stretch;
+                gap: 0rem;
+                flex-direction: column;
+                justify-content: center;
+                border: 1px solid var(--background);
+                border-radius: 1rem;
 
                 & a {
                     & img:hover {
@@ -215,15 +220,16 @@ nav {
 
                 & a:hover {
                     transform: none;
+                    border-top-right-radius: 1rem;
+                    border-top-left-radius: 1rem;
                 }
 
                 .menu {
                     display: flex;
-                    gap: .5rem;
-
-                    & img {
-                        flex: auto;
-                    }
+                    justify-content: space-around;
+                    padding: 1rem;
+                    width: 100%;
+                    border-top: 1px solid var(--background);
 
                     & img:hover {
                         transform: none;
@@ -768,8 +774,32 @@ footer {
         translate: -100%;
         z-index: 1;
         transition: translate var(--animation-time);
-    }
 
+        #project-nav {
+            & ul#project-list {
+                gap: 0rem;
+
+                & li {
+                    flex-direction: row;
+                    border: none;
+                    border-radius: 0rem;
+                    
+                    & a, a:hover {
+                        flex: 1 1 10rem;
+                        border-radius: 0rem;
+                    }
+                    .menu {
+                        flex: 1 1 1rem;
+                        border: none;
+                        justify-content: end;
+                        gap: 1rem;
+                    }
+                }
+
+            }
+        }
+    }
+    
     main {
         .container {
             .todo-wrapper {
@@ -821,7 +851,6 @@ footer {
             }
 
             .button-group {
-                /* flex-direction: column; */
                 gap: 1rem;
                 padding-inline: 4rem;
                 padding-bottom: 2rem;
