@@ -43,6 +43,7 @@ const EventHandler = (() => {
 
     function projectSidebar() {
         document.addEventListener('DOMContentLoaded', () => {
+            _closeSidebarOnSectionClick();
             _addProjectButton();
             _editProjectButton();
             _deleteProjectButton();
@@ -68,6 +69,20 @@ const EventHandler = (() => {
     }
 
     // ========================= FUNCTIONS ========================= //
+    // Function to close sidebar when clickin secttion (for mobile hamburger menu)
+    function _closeSidebarOnSectionClick () {
+        const sidebar = document.querySelector('nav');
+        
+        sidebar.addEventListener('click', (e) => {
+            const clickableElement = e.target.closest('a, a img'); 
+
+            if (clickableElement && sidebar.contains(clickableElement)) {
+                e.preventDefault();
+                document.querySelector('.hamburger input').checked = false;
+            }
+        })
+    }
+    
     // Functionality shortcut adder for buttons/elements
     function _createButtonFunctionality(button, buttonFunction) {
         const btn = document.querySelector(button);

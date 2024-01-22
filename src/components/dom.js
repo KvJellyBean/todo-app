@@ -18,8 +18,8 @@ const DOM = (() => {
             const list = document.createElement('li');
             list.dataset.projectName = project.name;
             list.innerHTML = `
-                <a href="#"  class="project-link" >
-                    <img src="${hash}" alt="Project Logo" class="project-link" /> ${project.name}
+                <a href="#"  class="project-link" data-section>
+                    <img src="${hash}" alt="Project Logo" class="project-link" data-section/> ${project.name}
                 </a>
 
                 <div class="menu">

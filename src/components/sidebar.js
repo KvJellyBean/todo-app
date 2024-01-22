@@ -34,15 +34,15 @@ const Sidebar = (() => {
             <h2>Home</h2>
             <hr>    
             <ul id="home-categories">
-                <li><a href="#" class="all-tasks"><img class="all-tasks" src="${allTasks}" alt="All Tasks" /> All Tasks</a></li>
+                <li data-section><a href="#" class="all-tasks"><img data-section class="all-tasks" src="${allTasks}" alt="All Tasks" /> All Tasks</a></li>
     
-                <li><a href="#" class="today"><img class="today" src="${today}" alt="Today" />Today</a></li>
+                <li data-section><a href="#" class="today"><img data-section class="today" src="${today}" alt="Today" />Today</a></li>
     
-                <li><a href="#" class="this-week"><img class="this-week" src="${upcoming}" alt="This Week" /> This Week</a></li>
+                <li data-section><a href="#" class="this-week"><img data-section class="this-week" src="${upcoming}" alt="This Week" /> This Week</a></li>
     
-                <li><a href="#" class="priority"><img class="priority" src="${priority}" alt="Priority" /> Priority</a></li>
+                <li data-section><a href="#" class="priority"><img data-section class="priority" src="${priority}" alt="Priority" /> Priority</a></li>
     
-                <li><a href="#" class="completed"><img class="completed" src="${completed}" alt="Completed" /> Completed</a></li>
+                <li data-section><a href="#" class="completed"><img data-section class="completed" src="${completed}" alt="Completed" /> Completed</a></li>
             </ul>
             <hr>
         `;
