@@ -34,8 +34,11 @@ module.exports = {
             fileName: 'index.html',
             favicon: './src/images/todoLogo.svg',
             title: 'Jellist',
-            templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"content\"></div></body></html>',
+            templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html lang="en"><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"content\"></div></body></html>',
             meta: {
+                description: { name: 'description', content: 'A responsive task management app that transcends the ordinary. Effortlessly manage your tasks with intuitive features, easily navigate through categories like today\'s tasks, weekly goals, and completed assignments. Prioritize with precision based on urgency and organize seamlessly by project. Experience a refined and organized approach to task management with Jellist, empowering you to conquer your daily responsibilities with ease.' },
+                keyword: { name: 'keywords', content: 'task management, to do app, productivity' },
+                author: { name: 'author', content: 'KvJellyBean' },
                 viewport: 'width=device-width, initial-scale=1.0'
             }
         }),

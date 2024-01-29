@@ -19,12 +19,12 @@ const DOM = (() => {
             list.dataset.projectName = project.name;
             list.innerHTML = `
                 <a href="#"  class="project-link" data-section>
-                    <img src="${hash}" alt="Project Logo" class="project-link" data-section/> ${project.name}
+                    <img src="${hash}" alt="Project Logo ${project.projectIndex}" class="project-link" data-section/> ${project.name}
                 </a>
 
                 <div class="menu">
-                    <img class="edit-project" src="${edit}" alt="Edit" />
-                    <img class="delete-project" src="${deleteIcon}" alt="Delete" />
+                    <img class="edit-project" src="${edit}" alt="Edit Project ${project.projectIndex}" />
+                    <img class="delete-project" src="${deleteIcon}" alt="Delete Project ${project.projectIndex}" />
                 </div>
             `;
 
@@ -64,9 +64,9 @@ const DOM = (() => {
                 </div>
                 
                 <div class="menu">
-                        <img class="edit" src=${edit} alt="Edit" />
-                        <img class="delete" src=${deleteIcon} alt="Delete" />
-                        <img class="info" src=${info} alt="Info" />
+                        <img class="edit" src=${edit} alt="Edit To Do ${todo.id}" />
+                        <img class="delete" src=${deleteIcon} alt="Delete To Do ${todo.id}" />
+                        <img class="info" src=${info} alt="To Do Information ${todo.id}" />
                 </div>
             `;
 
