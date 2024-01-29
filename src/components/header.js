@@ -14,7 +14,8 @@ const Header = (() => {
         const container = document.createElement('label');
         container.classList.add('hamburger');
         container.innerHTML = `
-            <input type="checkbox" />
+            <label for="hamburgerMenu">Navigation Menu</label>
+            <input id="hamburgerMenu" type="checkbox" />
         `;
         return container;
     }

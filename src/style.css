@@ -762,6 +762,11 @@ footer {
         display: flex;
         position: absolute;
         left: 2rem;
+
+        & label {
+            display: none;
+            font-size: .1rem;
+        }
     }
 
     .hamburger:has(input:checked)+#logo-container {
