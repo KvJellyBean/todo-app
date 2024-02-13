@@ -52,7 +52,7 @@ const projectLogic = (() => {
     function addProject(projectName, todos = '') {
         const project = getProjectByName(projectName);
         if (todos === '') {
-            todos = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd\'T\'HH:mm'), 'Low', projectName, false);
+            todos = Todo('My New Activity', 'Activity description', format(Date.now(), 'yyyy-MM-dd\'T\'hh:mm'), 'Low', projectName, false);
         }
 
         if (project === undefined) {

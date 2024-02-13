@@ -51,7 +51,7 @@ const DOM = (() => {
             container.classList.add('todo-item', todo.priority.toLowerCase());
             container.dataset.todoProject = todo.project;
             container.dataset.todoId = todo.id;
-            const formatedDate = format(todo.due, 'dd/MM/yyyy HH:mm a');
+            const formatedDate = format(todo.due, 'dd/MM/yyyy hh:mm a');
             container.innerHTML = `
                 <div class="checklist">
                     <input id="${todo.id}" type="checkbox" ${todo.status === true ? 'checked' : ''} />
@@ -230,7 +230,7 @@ const DOM = (() => {
 
         todoTitle.innerText = todo.title;
         todoDescription.innerText = todo.description;
-        todoDue.innerText = format(todo.due, 'dd/MM/yyyy HH:mm a');
+        todoDue.innerText = format(todo.due, 'dd/MM/yyyy hh:mm a');
         todoPriority.innerText = todo.priority;
         todoProject.innerText = todo.project;
         todoStatus.innerText = todo.status ? 'Completed' : 'Not Completed';
